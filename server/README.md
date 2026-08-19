@@ -9,10 +9,9 @@ The Axiom CMS backend is built using a modular **MVC-inspired architecture** wit
 - **MongoDB** — NoSQL database
 - **Mongoose** — ODM and schema management
 - **JWT** — Access & refresh token authentication
-- **bcrypt** — Password hashing
+- **bcrypt** — Password hashing + pepper 
 - **Nodemailer** — Email verification and authentication emails
 - **dotenv** — Environment variable management
-- **Multer** — File/image upload handling
 - **Slugify** — SEO-friendly URL slug generation
 
 ---
