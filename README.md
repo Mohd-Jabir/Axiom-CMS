@@ -146,8 +146,3 @@ Users can have:
 - First and last name
 - Avatar
 - Public profile page
-
-Public profiles are accessible through:
-
-```text
-/users/:username
