@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  /* Backgrounds */
+  --color-background: #0b0b0b;
+  --color-surface: #111111;
+  --color-card: #151515;
+  --color-card-hover: #191919;
+
+  /* Text */
+  --color-foreground: #f5f5f5;
+  --color-muted: #9a9a9a;
+  --color-subtle: #666666;
+
+  /* Borders */
+  --color-border: #272727;
+  --color-border-hover: #383838;
+
+  /* Axiom accent */
+  --color-primary: #f59e0b;
+  --color-primary-hover: #d97706;
+  --color-primary-soft: #2a1d08;
+
+  /* Status */
+  --color-success: #84cc16;
+  --color-danger: #ef4444;
+
+  /* Fonts */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar while keeping scrolling enabled */
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth scrolling for scrollable elements */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal overflow */
+html,
+body {
+  overflow-x: hidden;
+}
