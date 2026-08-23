@@ -49,6 +49,10 @@ export async function register(userData) {
   }
   const verificationToken = generateEmailVerificationToken(user);
   const verificationURL = `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
+  console.log("EMAIL_USER exists:", Boolean(process.env.EMAIL_USER));
+  console.log("EMAIL_PASS exists:", Boolean(process.env.EMAIL_PASS));
+  console.log("EMAIL_USER:", process.env.EMAIL_USER);
+  console.log("EMAIL_PASS length:", process.env.EMAIL_PASS?.length);
   try {
     await transporterMail(verificationURL, user);
   } catch (error) {
