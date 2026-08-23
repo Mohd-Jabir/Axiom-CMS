@@ -1,6 +1,12 @@
 import "dotenv/config";
 import { BrevoClient } from "@getbrevo/brevo";
-
+console.log("BREVO CONFIG:", {
+  hasApiKey: Boolean(process.env.BREVO_API_KEY),
+  keyLength: process.env.BREVO_API_KEY?.length,
+  keyPrefix: process.env.BREVO_API_KEY?.slice(0, 8),
+  senderEmail: process.env.BREVO_SENDER_EMAIL,
+  senderName: process.env.BREVO_SENDER_NAME,
+});
 const brevo = new BrevoClient({
   apiKey: process.env.BREVO_API_KEY,
 });
