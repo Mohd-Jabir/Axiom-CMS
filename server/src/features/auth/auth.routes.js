@@ -13,7 +13,7 @@ authRoutes.post("/refresh-token",refreshTokenLimiter,authController.refreshAcces
 // authRoutes.post("/forgot-password",authValidation.forgotSchema,authController.forgotPassword);
 // authRoutes.post("/reset-password",authValidation.resetSchema,authController.resetPassword);
 // authRoutes.post("/change-password",authController.changePassword);
-authRoutes.get("/verify-email",authController.verifyEmail);
-authRoutes.post("/resend-verification",resendVerificationLimiter,authValidation.resedSchema,authController.resendVerification);
+// authRoutes.get("/verify-email",authController.verifyEmail);
+// authRoutes.post("/resend-verification",resendVerificationLimiter,authValidation.resedSchema,authController.resendVerification);
 authRoutes.get("/me",authenticate,authController.getCurrentUser);
 export default authRoutes;;

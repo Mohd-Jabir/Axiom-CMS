@@ -65,36 +65,36 @@ export async function register(userData) {
     throw error;
   }
 
-  const verificationToken =
-    generateEmailVerificationToken(user);
+  // const verificationToken =
+  //   generateEmailVerificationToken(user);
 
-  const verificationURL =
-    `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
+  // const verificationURL =
+  //   `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
 
-  try {
-    await transporterMail(
-      verificationURL,
-      user
-    );
-  } catch (error) {
-    console.error(
-      "EMAIL SENDING ERROR:",
-      error
-    );
+  // try {
+  //   await transporterMail(
+  //     verificationURL,
+  //     user
+  //   );
+  // } catch (error) {
+  //   console.error(
+  //     "EMAIL SENDING ERROR:",
+  //     error
+  //   );
 
-    return {
-      success: true,
-      emailSent: false,
-      message:
-        "Registration successful, but we couldn't send the verification email. Please request another verification email.",
-    };
-  }
+  //   return {
+  //     success: true,
+  //     emailSent: false,
+  //     message:
+  //       "Registration successful, but we couldn't send the verification email. Please request another verification email.",
+  //   };
+  // }
 
   return {
     success: true,
     emailSent: true,
     message:
-      "Registration successful. Please check your email to verify your account.",
+      "Registration successful.You can now log in.",
   };
 }
 export async function login(credentials) {

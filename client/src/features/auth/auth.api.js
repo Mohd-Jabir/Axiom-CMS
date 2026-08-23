@@ -20,21 +20,21 @@ export const logoutAllDevice = async (id) => {
   return response.data;
 };
 
-export const verifyEmail = async (token) => {
-  const response = await api.get("/auth/verify-email", {
-    params: {
-      token,
-    },
-  });
+// export const verifyEmail = async (token) => {
+//   const response = await api.get("/auth/verify-email", {
+//     params: {
+//       token,
+//     },
+//   });
 
-  return response.data;
-};
-export const resendVerification = async (email) => {
-  const response = await api.post("/auth/resend-verification", {
-    email,
-  });
-  return response.data;
-};
+//   return response.data;
+// };
+// export const resendVerification = async (email) => {
+//   const response = await api.post("/auth/resend-verification", {
+//     email,
+//   });
+//   return response.data;
+// };
 
 export const getCurrentUser = async () => {
   const response = await api.get("/auth/me");

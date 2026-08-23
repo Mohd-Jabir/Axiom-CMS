@@ -9,8 +9,8 @@ import RoleRoute from "../routes/RoleRoute.jsx";
 import Home from "../pages/Home.jsx";
 import Register from "../pages/Register.jsx";
 import Login from "../pages/Login.jsx";
-import VerifyEmail from "../pages/VerifyEmail.jsx";
-import ResendVerification from "../pages/ResendVerification.jsx";
+// import VerifyEmail from "../pages/VerifyEmail.jsx";
+// import ResendVerification from "../pages/ResendVerification.jsx";
 import Posts from "../pages/Posts.jsx";
 import PostDetails from "../pages/PostDetails.jsx";
 import PostEditor from "../pages/PostEditor.jsx";
@@ -56,10 +56,10 @@ const router = createBrowserRouter([
             path: "users/:username",
             element: <Profile />,
           },
-          {
-            path: "verify-email",
-            element: <VerifyEmail />,
-          },
+          // {
+          //   path: "verify-email",
+          //   element: <VerifyEmail />,
+          // },
         ],
       },
      {
@@ -76,10 +76,10 @@ const router = createBrowserRouter([
   ],
 },
 
-{
-  path: "resend-verification",
-  element: <ResendVerification />,
-},
+// {
+//   path: "resend-verification",
+//   element: <ResendVerification />,
+// },
       {
         element: <ProtectedRoute />,
         children: [

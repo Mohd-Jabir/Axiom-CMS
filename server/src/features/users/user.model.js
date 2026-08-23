@@ -53,7 +53,7 @@ const userSchema = new Schema(
       },
     },
     verification: {
-      emailVerified: { type: Boolean, default: false },
+      emailVerified: { type: Boolean, default: true },
     },
     account: {
       status: {
