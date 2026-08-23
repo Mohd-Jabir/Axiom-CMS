@@ -62,23 +62,24 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        element: <GuestRoute />,
-        children: [
-          {
-            path: "login",
-            element: <Login />,
-          },
-          {
-            path: "register",
-            element: <Register />,
-          },
-          {
-            path: "resend-verification",
-            element: <ResendVerification />,
-          },
-        ],
-      },
+     {
+  element: <GuestRoute />,
+  children: [
+    {
+      path: "login",
+      element: <Login />,
+    },
+    {
+      path: "register",
+      element: <Register />,
+    },
+  ],
+},
+
+{
+  path: "resend-verification",
+  element: <ResendVerification />,
+},
       {
         element: <ProtectedRoute />,
         children: [
