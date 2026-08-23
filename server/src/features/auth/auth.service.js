@@ -7,26 +7,37 @@ import {
   getTokenExpiry,
   verifyRefreshToken,
   generateEmailVerificationToken,
-  transporterMail,
   verifyEmailVerificationToken,
 } from "./auth.utils.js";
+import { transporterMail } from "./auth.mail.js";
 import { serializeUser } from "./auth.mapper.js";
 export async function register(userData) {
-  const { firstName, lastName, username, email, password } = userData;
+  const {
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
+  } = userData;
 
   const userNameExists = await User.isUsernameTaken(username);
+
   if (userNameExists) {
     const error = new Error("Username already exists");
     error.statusCode = 409;
     throw error;
   }
+
   const userEmailExists = await User.isEmailTaken(email);
+
   if (userEmailExists) {
-    const error = new Error("Email elready exists");
+    const error = new Error("Email already exists");
     error.statusCode = 409;
     throw error;
   }
+
   let user;
+
   try {
     user = await User.create({
       identity: {
@@ -35,35 +46,55 @@ export async function register(userData) {
         username,
         email,
       },
+
       credentials: {
         passwordHash: password,
       },
     });
   } catch (error) {
     if (error.code === 11000) {
-      const err = new Error("Username or email already exists");
+      const err = new Error(
+        "Username or email already exists"
+      );
+
       err.statusCode = 409;
+
       throw err;
     }
+
     throw error;
   }
-  const verificationToken = generateEmailVerificationToken(user);
-  const verificationURL = `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
-  console.log("EMAIL_USER exists:", Boolean(process.env.EMAIL_USER));
-  console.log("EMAIL_PASS exists:", Boolean(process.env.EMAIL_PASS));
-  console.log("EMAIL_USER:", process.env.EMAIL_USER);
-  console.log("EMAIL_PASS length:", process.env.EMAIL_PASS?.length);
+
+  const verificationToken =
+    generateEmailVerificationToken(user);
+
+  const verificationURL =
+    `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
+
   try {
-    await transporterMail(verificationURL, user);
+    await transporterMail(
+      verificationURL,
+      user
+    );
   } catch (error) {
-    console.error("EMAIL SENDING ERROR:", error);
+    console.error(
+      "EMAIL SENDING ERROR:",
+      error
+    );
+
     return {
+      success: true,
+      emailSent: false,
       message:
         "Registration successful, but we couldn't send the verification email. Please request another verification email.",
     };
   }
+
   return {
-    message: "User registered successfully",
+    success: true,
+    emailSent: true,
+    message:
+      "Registration successful. Please check your email to verify your account.",
   };
 }
 export async function login(credentials) {
@@ -267,31 +298,55 @@ export async function verifyEmail(token) {
 }
 export async function resendVerification(email) {
   const user = await User.findByEmail(email);
+
   if (!user) {
     const error = new Error("User not found");
     error.statusCode = 404;
-    throw error;
-  }
-  if (user.verification.emailVerified) {
-    const error = new Error("Email is already verified.");
-    error.statusCode = 409;
+
     throw error;
   }
 
-  const verificationToken = generateEmailVerificationToken(user);
-  const verificationURL = `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
+  if (user.verification.emailVerified) {
+    const error = new Error(
+      "Email is already verified."
+    );
+
+    error.statusCode = 409;
+
+    throw error;
+  }
+
+  const verificationToken =
+    generateEmailVerificationToken(user);
+
+  const verificationURL =
+    `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
 
   try {
-    await transporterMail(verificationURL, user);
+    await transporterMail(
+      verificationURL,
+      user
+    );
   } catch (error) {
-    console.error("RESEND EMAIL ERROR:", error);
-    return {
-      message:
-        "We couldn't send the verification email. Please try again later.",
-    };
+    console.error(
+      "RESEND EMAIL ERROR:",
+      error
+    );
+
+    const err = new Error(
+      "We couldn't send the verification email. Please try again later."
+    );
+
+    err.statusCode = 500;
+
+    throw err;
   }
+
   return {
-    message: "Verification email sent successfully.",
+    success: true,
+    emailSent: true,
+    message:
+      "Verification email sent successfully.",
   };
 }
 export async function getCurrentUser(userData) {
