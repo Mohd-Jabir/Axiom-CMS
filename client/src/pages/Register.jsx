@@ -100,7 +100,7 @@ const Register = () => {
 
     registerMutation.mutate(formData, {
       onSuccess: () => {
-        navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
+        navigate("/login");
       },
 
       onError: (error) => {
@@ -129,7 +129,6 @@ const Register = () => {
         lg:py-32
       "
     >
-    
       <div
         className="
           pointer-events-none
@@ -331,7 +330,7 @@ const Register = () => {
             <span className="text-xs text-white/30">01</span>
           </div>
         </div>
-       
+
         <div
           className="
             w-full
