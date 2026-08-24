@@ -8,7 +8,7 @@ export function generateAccessToken(user) {
     },
     process.env.ACCESS_TOKEN_SECRET_KEY,
     {
-      expiresIn: "20m",
+      expiresIn: "5m",
     },
   );
 }
