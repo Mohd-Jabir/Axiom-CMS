@@ -52,13 +52,19 @@ export async function logoutAll(req, res, next) {
 }
 export async function refreshAccessToken(req, res, next) {
   try {
+    console.log("COOKIES:", req.cookies);
+    console.log("REFRESH TOKEN:", req.cookies.refreshToken);
+
     const refreshToken = req.cookies.refreshToken;
+
     const result = await authService.refreshAccessToken({
       refreshToken,
       ipAddress: req.ip,
       userAgent: req.get("user-agent"),
     });
+
     setRefreshTokenCookie(res, result.refreshToken);
+
     res.status(200).json({
       message: result.message,
       accessToken: result.accessToken,
